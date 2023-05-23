@@ -1,0 +1,130 @@
+.container-form {
+  background-color: rgba(245, 160, 160, 0.137);
+  border-radius: 10px;
+  justify-content: center;
+  display: flex;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.container-inputs {
+  color: bisque;
+  margin: 3rem;
+  max-width: max-content;
+}
+
+.form-group {
+  margin-bottom: 0.3rem;
+}
+
+.label-nombre,
+.label-imagen,
+.label-description,
+.label-fecha,
+.label-rating {
+  display: block;
+  font-weight: bold;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+}
+.genre-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.platforms-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.genre-checkbox-container {
+  flex-basis: 25%;
+  max-width: 200px;
+  font-weight: bold;
+}
+.platforms-checkbox-container{
+  flex-basis: 25%;
+  max-width: 200px;
+  font-weight: bold;
+}
+.input-checkbox {
+  appearance: none;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  position: relative;
+  top: 3px;
+}
+
+.input-checkbox:checked::before {
+  content: "\2713";
+  position: absolute;
+  top: -20px;
+  left: 2px;
+  font-size: 2.2em;
+  color: #fff;
+}
+
+.label-check {
+  color: #fff;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-submit {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "playstation";
+}
+
+.btn-submit:disabled {
+  background-color: grey;
+  color: white;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: #0069d9;
+}
+
+.btn-submit:disabled:hover {
+  background-color: grey;
+  color: white;
+  cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+  .container-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .genre-checkbox-container {
+    flex-basis: 50%;
+    max-width: 200px;
+    font-weight: bold;
+  }
+  .platforms-checkbox-container{
+    flex-basis: 50%;
+    max-width: 200px;
+    font-weight: bold;
+  }
+}

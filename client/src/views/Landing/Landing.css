@@ -1,0 +1,39 @@
+.landing-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  padding: 2rem;
+  color: #ffffff;
+
+}
+
+.landing-link {
+  display: flex;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "playstation";
+  color: #ffffff;
+  text-shadow: 0px 0px 20px #ffff;
+}
+
+.landing-link:hover,
+.landing-link:focus {
+  transform: scale(1.5);
+  color: rgb(211, 91, 91);
+  transition: all 0.5s ease-in-out;
+  text-shadow: 0px 0px 20px black;
+}
+
+@media screen and (max-width: 768px) {
+  .landing-link:hover {
+    transform: scale(1.15);
+    text-shadow: 0px 0px 20px black;
+  }
+  .landing-link{
+    font-size: 3rem;
+  }
+}

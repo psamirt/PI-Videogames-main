@@ -1,0 +1,32 @@
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 5rem;
+}
+
+.button-reset {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 2rem;
+}
+
+.select-general {
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px;
+  font-family: "playstation";
+  font-size: 12px;
+}
+
+.options-filter {
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+/* Agrega cualquier otro estilo personalizado según tus necesidades */

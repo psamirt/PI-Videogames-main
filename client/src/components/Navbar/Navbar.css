@@ -1,0 +1,51 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1%;
+}
+
+.img-container img {
+  width: 5rem;
+  margin: 10px;
+  border-radius: 50%;
+  box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+.img-container img:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.link-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "playstation";
+}
+
+.link-card a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px 50px;
+  border-radius: 50%;
+  margin: 1%;
+  background-color: rgb(115, 178, 230);
+  width: 5rem;
+  justify-content: center;
+  display: flex;
+  box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+.link-card a:visited {
+  color: inherit;
+}
+
+.link-card a:hover {
+  background-color: rgb(164, 202, 233);
+  color: #ffffff;
+  transition: 0.3s;
+  transform: translateY(2px);
+}

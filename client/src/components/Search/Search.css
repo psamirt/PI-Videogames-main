@@ -1,0 +1,26 @@
+ .search-container{
+    margin-right: 5rem;
+ }
+ .search-container input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-container button {
+    padding: 0.3rem 0.5rem;
+    margin: 0 0.3rem;
+    background-color:  rgb(179, 43, 43);
+    border: none;
+    border-radius: 0.2rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "playstation";
+  }
+  .search-container button:hover{
+    background-color: rgb(211, 91, 91);
+  }
+  
+  /* Agrega cualquier otro estilo personalizado según tus necesidades */
+  

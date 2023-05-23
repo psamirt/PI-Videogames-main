@@ -1,0 +1,76 @@
+.card-container {
+  background-color: #8386ce7c;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px #000000;
+  margin: 1rem;
+  padding: .5rem;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  width: 300px;
+  height: 400px;
+  position: relative;
+}
+
+.card-container:hover {
+  transform: translateY(-5px);
+}
+
+.card-container:visited {
+  color: inherit;
+}
+
+.card-rating {
+  position: absolute;
+  bottom: -20px;
+  right: 10px;
+  padding: 5px 10px;
+  color: #fff;
+  text-shadow: 0px 0px 5px #000000;
+  font-size: 16px;
+}
+.card-image {
+  box-shadow: 3px 3px 8px #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.card-tittle {
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  font-family: "playstation";
+  color: #ffffff;
+  text-shadow: 0px 0px 5px #000000;
+}
+
+
+.card-platform {
+  color: #000;
+  margin: 3px;
+  text-shadow: 0px 0px 5px #ffffff;
+  font-size: 14px;
+}
+.card-genre {
+  margin: 10px;
+  color: #000000;
+  text-shadow: 0px 0px 5px #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .card-container {
+    width: 300px;
+  }
+
+  .card-image {
+    height: 200px;
+    width: 280px;
+  }
+}
