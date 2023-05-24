@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Card.css";
+import estrellaIco from "../../iconos/estrellas.png"
 
 const Card = (props) => {
   return (
@@ -26,7 +27,7 @@ const Card = (props) => {
           </h4>
         </div>
         <div className="card-rating">
-          <h4>Calificación {props.rating}</h4>
+          <h4 className="container-rating" ><img src={estrellaIco} alt="estrella" className="icono-card"/>{props.rating}</h4>
         </div>
       </Link>
     </div>

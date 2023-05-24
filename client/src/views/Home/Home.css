@@ -9,79 +9,25 @@
     display: flex;
     justify-content: space-between;
   }
-.menu-container{
-    margin: 1rem;
-}
+
 .home-titulo{
     color: #ffff;
     text-shadow: 0px 0px 20px #ffff;
-    font-size: 40px;
+    font-size: 4rem;
     font-family: "playstation";
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     padding: 10px;
 }
 
-.menu {
-    /* Estilos para el menú */
-    display: none;
-    background-color: #f1f1f1;
-    padding: 10px;
-    transition: 1s ease-in-out;
+  @media screen and (max-width: 667px) {
+    .home-titulo{
+      font-size: 2rem;
+    }
+    .search-filter-container {
+      flex-direction: column;  
+      align-items: center; 
+    }
   }
-  
-  .menu.open {
-    display: flex;
-    background-color: black;
-    border-radius: 10px;
-  }
-  
-  .menu-toggle {
-    /* Estilos para el botón de toggle del menú */
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-
-  /* .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .menu-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  } */
-  
-  /* .menu-toggle {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .menu {
-    display: none;
-    margin-top: 20px;
-  }
-  
-  .menu.open {
-    display: block;
-  }
-  
-  .home-titulo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Agrega cualquier otro estilo personalizado según tus necesidades */

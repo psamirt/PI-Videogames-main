@@ -3,10 +3,11 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 1%;
+  max-height: max-content;
 }
 
 .img-container img {
-  width: 5rem;
+  width: 7rem;
   margin: 10px;
   border-radius: 50%;
   box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.4);
@@ -28,12 +29,12 @@
   color: rgb(0, 0, 0);
   text-decoration: none;
   font-weight: bold;
-  font-size: 20px;
-  padding: 5px 50px;
+  padding: 20px 80px;
+  font-size: 1.2rem;
   border-radius: 50%;
   margin: 1%;
   background-color: rgb(115, 178, 230);
-  width: 5rem;
+  width: 1rem;
   justify-content: center;
   display: flex;
   box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.4);
@@ -48,4 +49,16 @@
   color: #ffffff;
   transition: 0.3s;
   transform: translateY(2px);
+}
+
+
+@media (max-width: 667px) {
+  .img-container img {
+    width: 3rem;
+    margin: 10px;
+  }
+  .link-card a {
+    padding: 5px 25px;
+    font-size: .5rem;
+  }
 }
