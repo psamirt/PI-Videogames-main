@@ -3,6 +3,7 @@ import Cards from "../../components/Cards/Cards";
 import { useDispatch, useSelector } from "react-redux";
 import { getGames } from "../../redux/Actions";
 import "./Home.css";
+import Loading from "../../components/Loading/Loading";
 import Pagination from "../../components/Pagination/Pagination";
 import Filter from "../../components/Filter/Filter";
 import Search from "../../components/Search/Search";
@@ -10,6 +11,7 @@ import Search from "../../components/Search/Search";
 const Home = () => {
   const dispatch = useDispatch();
   const allGames = useSelector((state) => state.allGames);
+  const [loading, setLoading] = useState(true);
   const orderBolean = useSelector((state) => state.orderBolean);
   const genreBolean = useSelector((state) => state.genreBolean);
   const ratingBolean = useSelector((state) => state.ratingBolean);
@@ -28,7 +30,9 @@ const Home = () => {
   }, [allGames, indexOfFirstGame, indexOfTheLastGame]);
 
   useEffect(() => {
-    dispatch(getGames());
+    dispatch(getGames())
+      .then(() => setLoading(false))
+      .catch((error) => console.error(error));
   }, []);
 
   const displayedGames = useMemo(() => {
@@ -56,6 +60,12 @@ const Home = () => {
     filterByOrigin,
     originBolean,
   ]);
+
+  if (loading) {
+    return (
+      <Loading/>
+    );
+  }
 
   return (
     <div className="home-container">

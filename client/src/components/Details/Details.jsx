@@ -1,22 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../../redux/Actions";
 import "./Details.css";
 import { useHistory } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const Details = (props) => {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.detail);
   const history = useHistory();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getDetail(props.match.params.id));
+    dispatch(getDetail(props.match.params.id))
+    .then(() => setLoading(false))
+    .catch((error) => console.error(error));
   }, []);
 
-  function handleClick() {
-    history.goBack();
-  }
-
+  
+  if (loading) {
+    return (
+      <Loading/>
+      );
+    }
+    
+    function handleClick() {
+      history.goBack();
+    }
   return (
     <div className="detail-container">
       <div>
