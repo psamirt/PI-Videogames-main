@@ -11,6 +11,7 @@ export const FILTER_RATING = "FILTER_RATING";
 export const FILTER_GENRE = "FILTER_GENRE";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const GET_NAME = "GET_NAME";
+export const FILTER_PLATFORM = "FILTER_PLATFORM"
 
 export function getGames() {
   return async function (dispatch) {
@@ -35,7 +36,7 @@ export function postGame(info) {
       alert("Videojuego Creado");
       return response;
     } catch (error) {
-      console.error(error);
+      alert("No se pudo crear");
     }
   };
 }
@@ -67,7 +68,7 @@ export function getName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Videojuego no encontreado");
+      alert("Videojuego no encontrado");
       console.error(error);
     }
   };
@@ -118,6 +119,15 @@ export function filterByGenre(genre) {
     });
   };
 }
+
+// export function filterbyPlatform(platforms){
+//   return function (dispatch) {
+//     return dispatch({
+//       type: FILTER_PLATFORM,
+//       payload: platforms
+//     })
+//   }
+// }
 
 export function filterByOrigin(origin) {
   return function (dispatch) {

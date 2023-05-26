@@ -13,11 +13,11 @@ module.exports = (sequelize) => {
         unique: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(80),
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         allowNull: false,
       },
       platforms: {

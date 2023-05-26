@@ -72,20 +72,18 @@ const Create = () => {
   const disable = () => {
     let genreValid = false;
     let platformsValid = false;
-    let textValid = false;
-    for (let key in input) {
-      if (key === "genre" && input.genre.length > 0) {
-        genreValid = true;
+    let textValid = true;
+    for (let error in errors) {
+      if (errors[error] !== "") {
+        textValid = false;
+        break;
       }
-
-      if (key === "platforms" && input.platforms.length > 0) {
-        platformsValid = true;
-      }
-      for (let error in errors) {
-        if (errors[error] === "") {
-          textValid = true;
-        }
-      }
+    }
+    if (input.genre.length > 0) {
+      genreValid = true;
+    }
+    if (input.platforms.length > 0) {
+      platformsValid = true;
     }
     return !(genreValid && platformsValid && textValid);
   };
@@ -163,7 +161,7 @@ const Create = () => {
   return (
     <div className="container-form">
       <div className="container-inputs">
-        {console.log(input)}
+        {console.log(input, errors)}
         <form autoComplete="off" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name" className="label-nombre">
@@ -175,6 +173,7 @@ const Create = () => {
               className="form-control"
               onChange={handleChange}
               placeholder={"..."}
+              maxLength={80}
             />
           </div>
           <div className="form-group">
@@ -225,6 +224,7 @@ const Create = () => {
               className="form-control"
               onChange={handleChange}
               placeholder={"Ingresar..."}
+              maxLength={1000}
             />
           </div>
           <div className="form-group">

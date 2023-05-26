@@ -10,6 +10,7 @@ import {
   FILTER_GENRE,
   FILTER_ORIGIN,
   GET_NAME,
+  FILTER_PLATFORM,
 } from "../Actions";
 
 let initialState = {
@@ -21,10 +22,12 @@ let initialState = {
   ratingBolean: false,
   genreBolean: false,
   originBolean: false,
+  platformBolean: false,
   gamesAZ: [],
   gamesRating: [],
   filterByGenre: [],
   filterByOrigin: [],
+  filterbyPlatform: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -146,6 +149,25 @@ function rootReducer(state = initialState, action) {
         originBolean: true,
         currentPage: 1,
       };
+
+    // case FILTER_PLATFORM:
+    //   const gamesP = state.allGames;
+    //   const filterPlatform =
+    //     action.payload === "0"
+    //       ? gamesP
+    //       : gamesP.filter((el) => {
+    //           const platform =
+    //             el.platforms ||
+    //             el.Genres.map((platforms) => platforms.platforms);
+    //           return platform.includes(action.payload);
+    //         });
+    //   return {
+    //     ...state,
+    //     filterbyPlatform: filterPlatform,
+    //     platformBolean: true,
+    //     currentPage: 1,
+    //   };
+
     case GET_NAME:
       return {
         ...state,
@@ -160,10 +182,12 @@ function rootReducer(state = initialState, action) {
         ratingBolean: false,
         genreBolean: false,
         originBolean: false,
+        platformBolean: false,
         gamesAZ: [],
         gamesRating: [],
         filterByGenre: [],
         filterByOrigin: [],
+        filterPlatform: [],
         currentPage: 1,
       };
 

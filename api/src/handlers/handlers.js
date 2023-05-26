@@ -7,16 +7,20 @@ const {
 
 const getGamesAndName = async (req, res) => {
   const { name } = req.query;
-  let allGames = await allInfo();
-  if (name) {
-    let gameName = await allGames.filter((el) =>
-      el.name.toLowerCase().includes(name.toLowerCase())
-    );
-    gameName.length
-      ? res.status(200).send(gameName)
-      : res.status(404).send("Nombre no existente");
-  } else {
-    res.status(200).send(allGames);
+  try {
+    let allGames = await allInfo();
+    if (name) {
+      let gameName = allGames.filter((el) =>
+        el.name.toLowerCase().includes(name.toLowerCase())
+      );
+      gameName.length
+        ? res.status(200).send(gameName)
+        : res.status(404).send("Nombre no existente");
+    } else {
+      res.status(200).send(allGames);
+    }
+  } catch (error) {
+    res.status(400).send("Error al obtener los juegos");
   }
 };
 
@@ -30,12 +34,21 @@ const getGamesById = async (req, res) => {
       res.status(404).send("ID no encontrado");
     }
   } catch (error) {
-    res.status(400).send("ID not found");
+    res.status(400).send("Error al obtener el juego por ID");
   }
 };
 
 const createGame = async (req, res) => {
-  const { name, description, image, releaseDate, rating, genre,platforms,createdInDb } = req.body;
+  const {
+    name,
+    description,
+    image,
+    releaseDate,
+    rating,
+    genre,
+    platforms,
+    createdInDb,
+  } = req.body;
   try {
     const create = await createVideogame(
       name,
@@ -47,12 +60,11 @@ const createGame = async (req, res) => {
       platforms,
       createdInDb
     );
-    return res.status(200).send(create); 
+    return res.status(200).send(create);
   } catch (error) {
-    return res.status(400).send("Debe ingresar todos los campos"); 
+    return res.status(400).send("Debe ingresar todos los campos");
   }
 };
-
 
 //---------------------------------------------------------------------------------
 
