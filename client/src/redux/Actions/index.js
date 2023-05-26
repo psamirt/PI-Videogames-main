@@ -3,7 +3,6 @@ import axios from "axios";
 export const GET_GAMES = "GET_GAMES";
 export const POST_GAMES = "POST_GAMES";
 export const GET_GENRE = "GET_GENRE";
-export const GET_PLATFORMS = "GET_PLATFORMS";
 export const GET_DETAIL = "GET_DETAIL";
 export const CURR_PAGE = "CURR_PAGE";
 export const FILTER_AZ = "FILTER_AZ";

@@ -10,7 +10,6 @@ import {
   FILTER_GENRE,
   FILTER_ORIGIN,
   GET_NAME,
-  GET_PLATFORMS,
 } from "../Actions";
 
 let initialState = {
@@ -67,6 +66,13 @@ function rootReducer(state = initialState, action) {
           orderBolean: true,
           currentPage: 1,
         };
+      } else if (action.payload === "0") {
+        return {
+          ...state,
+          gamesAZ: state.allGames,
+          orderBolean: false,
+          currentPage: 1,
+        };
       } else {
         return {
           ...state,
@@ -90,7 +96,13 @@ function rootReducer(state = initialState, action) {
           gamesRating: mayor,
           ratingBolean: true,
           currentPage: 1,
-          
+        };
+      } else if (action.payload === "0") {
+        return {
+          ...state,
+          gamesRating: state.allGames,
+          ratingBolean: false,
+          currentPage: 1,
         };
       } else {
         return {
@@ -112,7 +124,7 @@ function rootReducer(state = initialState, action) {
           ? games
           : games.filter((el) => {
               const genres = el.genre || el.Genres.map((genre) => genre.name);
-              return Array.isArray(genres) && genres.includes(action.payload);
+              return genres.includes(action.payload);
             });
       return {
         ...state,
@@ -133,14 +145,12 @@ function rootReducer(state = initialState, action) {
           action.payload === "all" ? state.allGames : originFiltered,
         originBolean: true,
         currentPage: 1,
-
       };
     case GET_NAME:
       return {
         ...state,
         allGames: action.payload,
         currentPage: 1,
-
       };
 
     case RESET:

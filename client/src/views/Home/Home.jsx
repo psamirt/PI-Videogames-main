@@ -36,9 +36,9 @@ const Home = () => {
   }, []);
 
   const displayedGames = useMemo(() => {
-    if (orderBolean && !ratingBolean) {
+    if (orderBolean) {
       return gamesAZ.slice(indexOfFirstGame, indexOfTheLastGame);
-    } else if (!orderBolean && ratingBolean) {
+    } else if (ratingBolean) {
       return gamesRating.slice(indexOfFirstGame, indexOfTheLastGame);
     } else if (genreBolean) {
       return filterByGenre.slice(indexOfFirstGame, indexOfTheLastGame);
@@ -73,7 +73,7 @@ const Home = () => {
       <Pagination gamesPerPage={gamesPerPage} allGames={allGames.length} />
       <div className="search-filter-container">
         <Filter />
-        <Search />
+        <Search/>
       </div>
       <Cards allGames={displayedGames} />
     </div>

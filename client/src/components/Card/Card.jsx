@@ -17,7 +17,7 @@ const Card = (props) => {
           </h4>
         </div>
         <div className="card-image">
-          <img className="image" src={props.image} alt={props.name} />
+          <img className="image" loading="lazy" src={props.image} alt={props.name} />
         </div>
         <div className="card-platform">
           <h4>
