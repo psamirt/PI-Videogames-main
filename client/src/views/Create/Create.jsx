@@ -66,29 +66,32 @@ const Create = () => {
           rating: "Rating solo puede ser de 0 a 5 incluyendo decimales.",
         });
       return;
-    }     
+    }
   };
+
   const disable = () => {
-    let disabled = true;
-    for (let error in errors) {
-      if (errors[error] === "") disabled = false;
-      else {
-        disabled = true;
-        break;
+    let genreValid = false;
+    let platformsValid = false;
+    let textValid = false;
+    for (let key in input) {
+      if (key === "genre" && input.genre.length > 0) {
+        genreValid = true;
+      }
+
+      if (key === "platforms" && input.platforms.length > 0) {
+        platformsValid = true;
+      }
+      for (let error in errors) {
+        if (errors[error] === "") {
+          textValid = true;
+        }
       }
     }
-    return disabled;
+    return !(genreValid && platformsValid && textValid);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (input.genre.length === 0) {
-      alert("Debe seleccionar al menos un género.");
-    }
-    if (input.platforms.length === 0) {
-      alert("Debe seleccionar al menos una plataforma.");
-      return;
-    }
     dispatch(postGame(input));
     setInput({
       name: "",
@@ -99,14 +102,14 @@ const Create = () => {
       rating: "",
       genre: [],
     });
-    e.target.reset()
+    e.target.reset();
     setErrors({
       name: "Nombre",
       image: "Imagen",
       description: "Descripción",
       releaseDate: "Fecha de lanzamiento",
       rating: "Calificacion",
-    })
+    });
   };
 
   const handleChange = (e) => {
@@ -134,7 +137,7 @@ const Create = () => {
     }
     setInput({ ...input, genre: updatedGenres });
   };
-  
+
   const handleCheckPlatforms = (e) => {
     const selected = e.target.value;
     const isChecked = e.target.checked;
@@ -160,7 +163,7 @@ const Create = () => {
   return (
     <div className="container-form">
       <div className="container-inputs">
-        {console.log(errors,input)}
+        {console.log(input)}
         <form autoComplete="off" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name" className="label-nombre">
@@ -235,9 +238,9 @@ const Create = () => {
                     className="input-checkbox"
                     type="checkbox"
                     name="genre"
-                    value={genre.id}
+                    value={genre.name}
                     onChange={handleCheckGenre}
-                    checked={input.genre.includes(genre.id.toString())}
+                    checked={input.genre.includes(genre.name)}
                   />
                   <label className="label-check" htmlFor="genre">
                     {genre.name}
@@ -253,18 +256,18 @@ const Create = () => {
             <div className="platforms-container">
               {Array.from(
                 new Set(allGames.flatMap((game) => game.platforms))
-              ).map((platform) => (
-                <div className="platforms-checkbox-container" key={platform}>
+              ).map((platforms) => (
+                <div className="platforms-checkbox-container" key={platforms}>
                   <input
                     className="input-checkbox"
                     type="checkbox"
                     name="platforms"
-                    value={platform}
+                    value={platforms}
                     onChange={handleCheckPlatforms}
-                    checked={input.platforms.includes(platform)}
+                    checked={input.platforms.includes(platforms)}
                   />
-                  <label className="label-check" htmlFor={platform}>
-                  {platform}
+                  <label className="label-check" htmlFor={platforms}>
+                    {platforms}
                   </label>
                 </div>
               ))}

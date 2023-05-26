@@ -65,6 +65,7 @@ function rootReducer(state = initialState, action) {
           ...state,
           gamesAZ: asc,
           orderBolean: true,
+          currentPage: 1,
         };
       } else {
         return {
@@ -88,6 +89,8 @@ function rootReducer(state = initialState, action) {
           ...state,
           gamesRating: mayor,
           ratingBolean: true,
+          currentPage: 1,
+          
         };
       } else {
         return {
@@ -98,6 +101,7 @@ function rootReducer(state = initialState, action) {
             return 0;
           }),
           ratingBolean: true,
+          currentPage: 1,
         };
       }
 
@@ -106,14 +110,15 @@ function rootReducer(state = initialState, action) {
       const genreFiltered =
         action.payload === "0"
           ? games
-          : games.filter(
-              (el) =>
-                Array.isArray(el.genre) && el.genre.includes(action.payload)
-            );
+          : games.filter((el) => {
+              const genres = el.genre || el.Genres.map((genre) => genre.name);
+              return Array.isArray(genres) && genres.includes(action.payload);
+            });
       return {
         ...state,
         filterByGenre: genreFiltered,
         genreBolean: true,
+        currentPage: 1,
       };
 
     case FILTER_ORIGIN:
@@ -127,11 +132,15 @@ function rootReducer(state = initialState, action) {
         filterByOrigin:
           action.payload === "all" ? state.allGames : originFiltered,
         originBolean: true,
+        currentPage: 1,
+
       };
     case GET_NAME:
       return {
         ...state,
         allGames: action.payload,
+        currentPage: 1,
+
       };
 
     case RESET:

@@ -7,9 +7,10 @@ module.exports = (sequelize) => {
     "Videogame",
     {
       id: {
-        type: DataTypes.STRING,
-        defaultValue: DataTypes.STRING,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        unique: true,
       },
       name: {
         type: DataTypes.STRING,
@@ -27,7 +28,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      releaseDate: {
+      released: {
         type: DataTypes.STRING,
         allowNull: false,
       },

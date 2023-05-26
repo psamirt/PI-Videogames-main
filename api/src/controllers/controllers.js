@@ -59,57 +59,53 @@ const allInfo = async () => {
 };
 
 const infoById = async (idVideogame) => {
-  try {
-    if (idVideogame) {
-      const gameFromBd = await Videogame.findOne({
-        where: { id: idVideogame },
-        include: Genre,
-      });
-      if (gameFromBd) {
-        const videogame = {
-          id: gameFromBd.id,
-          name: gameFromBd.name,
-          description: gameFromBd.description,
-          image: gameFromBd.image,
-          released: gameFromBd.releaseDate,
-          rating: gameFromBd.rating,
-          genre: gameFromBd.Genres.map((genre) => genre.name),
-          platforms: gameFromBd.platforms,
-        };
-        return videogame;
-      }
-    }
-    let idFound = await axios.get(
-      `https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`
-    );
-    idFound = await idFound.data;
-    
-    const videogame = {
-      id: idFound.id,
-      name: idFound.name,
-      description: he
-        .decode(idFound.description)
-        .replace(/<\/?p>|<br\s*\/?>/gi, "")
-        .replace(/\n/g, ""),
-      image: idFound.background_image,
-      released: idFound.released,
-      rating: idFound.rating,
-      genre: idFound.genres.map((genre) => genre.name),
-      platforms: idFound.parent_platforms.map(
-        (platform) => platform.platform.name
-      ),
+  if (isNaN(idVideogame)) {
+    let gameFound = await Videogame.findByPk(idVideogame, {
+      include: {
+        model: Genre,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    });
+    if (!gameFound) throw Error(`${idVideogame} en DB no encontrado`);
+    const gameIdBD = {
+      id: gameFound.id,
+      name: gameFound.name,
+      platforms: gameFound.platforms,
+      description: gameFound.description,
+      rating: gameFound.rating,
+      image: gameFound.image,
+      released: gameFound.released,
+      createdInDb: gameFound.created,
+      Genres: gameFound.Genres.map((genre) => genre.name),
     };
-    return videogame;
-  } catch (error) {
-    console.error(error);
+    return gameIdBD;
   }
+  const { data } = await axios.get(
+    `https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`
+  );
+  if (!data.name) throw Error(`${idVideogame} en API no encontrado`);
+  const gameIdApi = {
+    id: data.id,
+    name: data.name,
+    image: data.background_image,
+    platforms: data.parent_platforms.map((platform) => platform.platform.name),
+    description: data.description_raw,
+    released: data.released,
+    rating: data.rating,
+    createdInDb: false,
+    Genres: data.genres.map((genre) => genre.name),
+  };
+  return gameIdApi;
 };
 
 const createVideogame = async (
   name,
   description,
   image,
-  releaseDate,
+  released,
   rating,
   genre,
   platforms,
@@ -120,14 +116,14 @@ const createVideogame = async (
       name,
       description,
       image,
-      releaseDate,
+      released,
       rating,
       platforms,
       createdInDb,
     });
     const genreRecords = await Genre.findAll({
       where: {
-        id: {
+        name: {
           [Op.in]: genre,
         },
       },
@@ -146,7 +142,7 @@ const infoGenres = async () => {
     const genreBD = await Genre.findAll();
     return genreBD;
   } catch (error) {
-    console.log("server error");
+    console.error(error);
   }
 };
 

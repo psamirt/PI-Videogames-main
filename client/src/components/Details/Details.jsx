@@ -43,7 +43,7 @@ const Details = (props) => {
         <h4 className="text-container">
           Plataformas: <div className="inside"> *{Array.isArray(detail.platforms) ? detail.platforms.join(" - ") : detail.platforms}</div>
         </h4>
-        <h4 className="text-container">Generos: <div className="inside">* {Array.isArray(detail.genre) ? detail.genre.join(" - ") : detail.genre}</div></h4>
+        <h4 className="text-container">Generos: <div className="inside">* {Array.isArray(detail.Genres) ? detail.Genres.join(" - ") : detail.Genres}</div></h4>
       </div>
       <div className="container-image-description">
         <img className="detail-image" src={detail.image} alt="" />
