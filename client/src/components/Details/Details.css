@@ -121,13 +121,16 @@
     font-size: 1rem;
     margin: .2rem;
     padding: .1rem;
-    text-shadow: 0px 0px 4px#ffffff;
+    color: #ffffff;
+    text-shadow: 0px 0px 5px #000000;
     flex-direction: row;
     align-items: center;
   }
   .inside{
-  font-size: .6rem;
-  margin-left: .5rem;
+  font-size: .7rem;
+  margin-left: 1rem;
+  color: #ffffff;
+  text-shadow: 0px 0px 5px #000000;
   }
   .detail-image {
     margin-bottom: .3rem;
@@ -141,7 +144,9 @@
   .container-rating-released-platform-genre {
     width: 100%;
     flex-direction: column;
-    
+    background-color: #c244444d;
+    border-radius: 5px;
+    margin: .8rem;
   }
 
 }

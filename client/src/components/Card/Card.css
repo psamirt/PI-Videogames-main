@@ -77,12 +77,18 @@
 @media screen and (max-width: 667px) {
   .card-tittle{
     font-size: .7rem;
+    color: #000000;
+    text-shadow: 0px 0px 5px #ffffff;
   }
   .card-genre{
     font-size: .8rem;
+    color: #ffffff;
+    text-shadow: 0px 0px 5px #000000;
   }
   .card-platform{
     font-size: .8rem;
+    color: #ffffff;
+    text-shadow: 0px 0px 5px #000000;
   }
   .card-rating{
     font-size: .8rem;
