@@ -16,7 +16,7 @@ export const FILTER_PLATFORM = "FILTER_PLATFORM"
 export function getGames() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/videogames/");
+      const response = await axios.get("http://localhost:3001/videogames/");
       return dispatch({
         type: GET_GAMES,
         payload: response.data,
@@ -30,7 +30,7 @@ export function postGame(info) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        "/videogames/",
+        "http://localhost:3001/videogames/",
         info
       );
       alert("Videojuego Creado");
@@ -45,7 +45,7 @@ export function getDetail(id) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `/videogames/${id}`
+        `http://localhost:3001/videogames/${id}`
       );
       return dispatch({
         type: GET_DETAIL,
@@ -61,7 +61,7 @@ export function getName(name) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `/videogames?name=${name}`
+        `http://localhost:3001/videogames?name=${name}`
       );
       return dispatch({
         type: GET_NAME,
@@ -77,7 +77,7 @@ export function getName(name) {
 export function getGenre() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/genres/");
+      const response = await axios.get("http://localhost:3001/genres/");
       return dispatch({
         type: GET_GENRE,
         payload: response.data,
