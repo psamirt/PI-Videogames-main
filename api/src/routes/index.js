@@ -20,5 +20,6 @@ router.post("/videogames", createGame);
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+//prueba de commit
 
 module.exports = router;
