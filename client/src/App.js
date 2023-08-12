@@ -7,7 +7,7 @@ import Create from "./views/Create/Create";
 import Details from "./components/Details/Details";
 import axios from "axios";
 axios.defaults.baseURL =
-  "postgres://videogames_i217_user:ghjui1HMEesPxk1QSfinwOWy6vreQQX5@dpg-cjbdbavdb61s73fgrlo0-a/videogames_i217/";
+  "https://game-zone-z9l3.onrender.com";
 
 function App() {
   return (
