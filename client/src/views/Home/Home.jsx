@@ -73,7 +73,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <header className="home-titulo">Gamer Zone</header>
+      <header className="home-titulo">Game Zone</header>
       <Pagination gamesPerPage={gamesPerPage} allGames={allGames.length} />
       <div className="search-filter-container">
         <Filter />
