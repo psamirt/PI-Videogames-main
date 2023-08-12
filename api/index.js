@@ -19,13 +19,15 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
+require('dotenv').config()
+const {PORT}= process.env
 const { getGamesFromApi } = require("./src/utils/utils.js");
 
 async function startServer() {
   await conn.sync({ force: true });
   await getGamesFromApi();
-  server.listen(3001, () => {
-    console.log("%s listening at 3001");
+  server.listen(PORT, () => {
+    console.log("%s listening at,PORT");
   });
 }
 
