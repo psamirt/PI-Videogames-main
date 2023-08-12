@@ -5,16 +5,25 @@ import Navbar from "./components/Navbar/Navbar";
 import Landing from "./views/Landing/Landing";
 import Create from "./views/Create/Create";
 import Details from "./components/Details/Details";
+import axios from "axios";
+axios.defaults.baseURL =
+  "postgres://videogames_i217_user:ghjui1HMEesPxk1QSfinwOWy6vreQQX5@dpg-cjbdbavdb61s73fgrlo0-a/videogames_i217/";
 
 function App() {
   return (
     <BrowserRouter>
       <div>
-        <Route path="/" render={(props) => {
-    if (props.location.pathname !== "/" && !props.location.pathname.startsWith("/details/")) {
-      return <Navbar />;
-          }
-        }} />
+        <Route
+          path="/"
+          render={(props) => {
+            if (
+              props.location.pathname !== "/" &&
+              !props.location.pathname.startsWith("/details/")
+            ) {
+              return <Navbar />;
+            }
+          }}
+        />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/home" component={Home} />
@@ -25,6 +34,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;
