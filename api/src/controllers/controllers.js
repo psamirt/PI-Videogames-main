@@ -5,6 +5,23 @@ const { Op } = require("sequelize");
 const he = require("he");
 
 const apiInfo = async () => {
+  // Verificar si hay datos en la base de datos
+  const existingGames = await Videogame.findAll();
+
+  if (existingGames.length > 0) {
+    // Si hay datos en la base de datos, retornarlos
+    return existingGames.map((game) => ({
+      id: game.id,
+      name: game.name,
+      image: game.image,
+      releaseDate: game.releaseDate,
+      rating: game.rating,
+      genre: game.genres.map((genre) => genre.name),
+      platforms: game.platforms.map((platform) => platform.name),
+    }));
+  }
+
+  // Si no hay datos en la base de datos, hacer llamadas a la API y guardar en la base de datos
   const games = [];
   let nextPage = 1;
 
@@ -32,8 +49,36 @@ const apiInfo = async () => {
     games.push(...info);
     nextPage++;
   }
+
+  // Guardar los juegos en la base de datos
+  await Promise.all(
+    games.map(async (game) => {
+      const createdGame = await Videogame.create({
+        id: game.id,
+        name: game.name,
+        image: game.image,
+        releaseDate: game.releaseDate,
+        rating: game.rating,
+      });
+
+      // Asociar géneros y plataformas con el juego
+      await createdGame.setGenres(game.genre);
+      await createdGame.setPlatforms(game.platforms);
+    })
+  );
+
   return games;
 };
+
+// Llamar a la función para obtener los juegos
+apiInfo()
+  .then((games) => {
+    console.log("Juegos obtenidos:", games);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
 
 const bdInfo = async () => {
   try {
