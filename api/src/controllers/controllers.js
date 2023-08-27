@@ -4,80 +4,54 @@ const { API_KEY } = process.env;
 const { Op } = require("sequelize");
 const he = require("he");
 
-const apiInfo = async () => {
-  // Verificar si hay datos en la base de datos
-  const existingGames = await Videogame.findAll();
+const isGameDataInDatabase = async () => {
+  const count = await Videogame.count();
+  return count > 0;
+};
 
-  if (existingGames.length > 0) {
-    // Si hay datos en la base de datos, retornarlos
-    return existingGames.map((game) => ({
+const apiInfo = async () => {
+  if (await isGameDataInDatabase()) {
+    // Data is already in the database, retrieve and return it
+    const gamesFromDB = await Videogame.findAll({
+      attributes: ['id', 'name', 'image', 'releaseDate', 'rating'],
+      include: [{
+        model: Genre,
+        attributes: ['name'],
+        through: { attributes: [] }, // Exclude Genre association details
+      }],
+    });
+
+    return gamesFromDB.map((game) => ({
       id: game.id,
       name: game.name,
       image: game.image,
       releaseDate: game.releaseDate,
       rating: game.rating,
-      genre: game.genres.map((genre) => genre.name),
-      platforms: game.platforms.map((platform) => platform.name),
+      genre: game.Genres.map((genre) => genre.name),
     }));
-  }
+  } else {
+    // Data is not in the database, fetch from API and store in the database
+    const games = [];
+    let nextPage = 1;
 
-  // Si no hay datos en la base de datos, hacer llamadas a la API y guardar en la base de datos
-  const games = [];
-  let nextPage = 1;
+    while (games.length < 100) {
+      // ... (your existing API fetching logic)
 
-  while (games.length < 100) {
-    const api = await axios.get(
-      `https://api.rawg.io/api/games?key=${API_KEY}&page=${nextPage}`
-    );
-    const data = api.data.results;
-    if (data.length === 0) {
-      break;
+      games.push(...info);
+      nextPage++;
     }
-    const info = data.map((el) => {
-      return {
-        id: el.id,
-        name: el.name,
-        image: el.background_image,
-        releaseDate: el.released,
-        rating: el.rating,
-        genre: el.genres.map((genre) => genre.name),
-        platforms: el.parent_platforms.map(
-          (platform) => platform.platform.name
-        ),
-      };
-    });
-    games.push(...info);
-    nextPage++;
+
+    // Store the games in the database
+    await Promise.all(games.map(async (game) => {
+      const { genre, ...gameData } = game;
+      const createdGame = await Videogame.create(gameData);
+      const genres = await Genre.findAll({ where: { name: genre } });
+      await createdGame.addGenres(genres);
+    }));
+
+    return games;
   }
-
-  // Guardar los juegos en la base de datos
-  await Promise.all(
-    games.map(async (game) => {
-      const createdGame = await Videogame.create({
-        id: game.id,
-        name: game.name,
-        image: game.image,
-        releaseDate: game.releaseDate,
-        rating: game.rating,
-      });
-
-      // Asociar géneros y plataformas con el juego
-      await createdGame.setGenres(game.genre);
-      await createdGame.setPlatforms(game.platforms);
-    })
-  );
-
-  return games;
 };
-
-// Llamar a la función para obtener los juegos
-apiInfo()
-  .then((games) => {
-    console.log("Juegos obtenidos:", games);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
 
 
 const bdInfo = async () => {
